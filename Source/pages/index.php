@@ -13,22 +13,32 @@ $t_links_span = $t_show_stats ? 4 : 2;
 
 $t_repos = SourceRepo::load_all();
 
-html_page_top1( plugin_lang_get( 'title' ) );
-html_page_top2();
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
 ?>
 
-<br/>
-<table class="<?php echo $t_class ?>" align="center" cellspacing="1">
+<div class="col-md-12 col-xs-12">
 
-<tr>
-<td class="form-title" colspan="<?php echo $t_title_span ?>"><?php echo plugin_lang_get( 'repositories' ) ?></td>
-<td class="right" colspan="<?php echo $t_links_span ?>">
-<?php
+	<div class="space-10"></div>
+	
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-file-o"></i>
+			<?php echo plugin_lang_get( 'repositories' ) ?>
+			
+		</h4>
+		<div class="widget-toolbar">
+			<?php
 print_bracket_link( plugin_page( 'search_page' ), plugin_lang_get( 'search' ) );
 if ( $t_can_manage ) { print_bracket_link( plugin_page( 'manage_config_page' ), plugin_lang_get( 'configuration' ) ); }
 ?>
-</td>
-</tr>
+		</div>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr class="row-category">
 <td width="30%"><?php echo plugin_lang_get( 'repository' ) ?></td>
@@ -65,16 +75,33 @@ if ( $t_can_manage ) { print_bracket_link( plugin_page( 'manage_config_page' ), 
 <?php } ?>
 
 </table>
+			</div>
+		</div>
+	</div>
+</div>
+	
 
 <?php if ( $t_can_manage ) { ?>
-<br/>
+	<div class="space-10"></div>
+	
+	<div class="form-container">
+
 <form action="<?php echo plugin_page( 'repo_create' ) ?>" method="post">
 <?php echo form_security_field( 'plugin_Source_repo_create' ) ?>
-<table class="width50" align="center" cellspacing="1">
+	
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-file-o"></i>
+			<?php echo plugin_lang_get( 'create_repository' ) ?>
+		</h4>
+	</div>
+	
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
 
-<tr>
-<td class="form-title" colspan="2"><?php echo plugin_lang_get( 'create_repository' ) ?></td>
-</tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo plugin_lang_get( 'name' ) ?></td>
@@ -93,14 +120,20 @@ if ( $t_can_manage ) { print_bracket_link( plugin_page( 'manage_config_page' ), 
 </td>
 </tr>
 
-<tr>
-<td class="center" colspan="2"><input type="submit" value="<?php echo plugin_lang_get( 'create_repository' ) ?>"/></td>
-</tr>
-
 </table>
+			</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( "create_repository" ) ?>"/>
+		</div>
+	</div>
+</div>
 </form>
+</div>
 <?php } ?>
 
+</div>
+
 <?php
-html_page_bottom1( __FILE__ );
+layout_page_end( __FILE__ );
 

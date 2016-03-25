@@ -12,8 +12,8 @@ list( $t_filter, $t_permalink ) = Source_Generate_Filter();
 $t_date_start = ( is_null( $t_filter->filters['date_start']->value ) ? 'start' : $t_filter->filters['date_start']->value );
 $t_date_end = ( is_null( $t_filter->filters['date_end']->value ) ? 'now' : $t_filter->filters['date_end']->value );
 
-html_page_top1( plugin_lang_get( 'title' ) );
-html_page_top2();
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
 
 ?>
 
@@ -21,19 +21,33 @@ html_page_top2();
 <script src="<?php echo plugin_file( 'search.js' ) ?>"></script>
 <?php } ?>
 
-<br/>
+<div class="col-md-12 col-xs-12">
+
+	<div class="space-10"></div>
+	<div class="form-container">
 <form action="<?php echo helper_mantis_url( 'plugin.php' ) ?>" method="get">
 <input type="hidden" name="page" value="Source/search"/>
-<table class="width75 SourceFilters" align="center" cellspacing="1">
 
-<tr>
-<td class="form-title" colspan="2"><?php echo plugin_lang_get( 'search_changesets' ) ?></td>
-<td class="right" colspan="5">
-<?php
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-file-o"></i>
+					<?php echo plugin_lang_get( 'search_changesets' ) ?>
+				</h4>
+				
+				<div class="widget-toolbar">
+				<?php
 print_bracket_link( plugin_page( 'search_page' ), plugin_lang_get( 'new_search' ) );
 print_bracket_link( plugin_page( 'index' ), plugin_lang_get( 'back' ) );
 ?>
-</tr>
+				</div>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr class="row-category">
 <td><?php echo plugin_lang_get( 'type' ) ?></td>
@@ -96,13 +110,18 @@ print_bracket_link( plugin_page( 'index' ), plugin_lang_get( 'back' ) );
 <td colspan="6"><input name="filename" size="40" value="<?php echo string_attribute( $t_filter->filters['f.filename']->value ) ?>"/></td>
 </tr>
 
-<tr>
-<td class="center" colspan="7"><input type="submit" value="<?php echo plugin_lang_get( 'search' ) ?>"/></td>
-</tr>
-
 </table>
+					</div>
+				</div>
+				<div class="widget-toolbox padding-8 clearfix">
+					<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( "search" ) ?>"/>
+				</div>
+			</div>
+		</div>
 </form>
+	</div>
+</div>
 
 <?php
-html_page_bottom1( __FILE__ );
+layout_page_end( __FILE__ );
 

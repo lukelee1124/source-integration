@@ -6,8 +6,8 @@
 auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
-html_page_top1( plugin_lang_get( 'title' ) );
-html_page_top2();
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
 
 print_manage_menu();
 
@@ -19,14 +19,29 @@ $t_import_urls = unserialize( plugin_config_get( 'import_urls' ) );
 
 ?>
 
-<br/>
+<div class="col-md-12 col-xs-12">
+
+	<div class="space-10"></div>
+	
+	<div class="form-container">
+	
 <form action="<?php echo plugin_page( 'manage_config' ) ?>" method="post">
 <?php echo form_security_field( 'plugin_Source_manage_config' ) ?>
-<table class="width100" align="center" cellspacing="1">
 
-<tr>
-<td class="form-title" colspan="2"><?php echo plugin_lang_get( 'title' ), ': ', plugin_lang_get( 'configuration' ) ?></td>
-</tr>
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-file-o"></i>
+			<?php echo plugin_lang_get( 'title' ), ': ', plugin_lang_get( 'configuration' ) ?>
+		</h4>
+	</div>
+	
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+
+
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo plugin_lang_get( 'view_threshold' ) ?></td>
@@ -209,6 +224,8 @@ foreach( $t_import_urls as $t_ip ) {
 
 <?php
 foreach( SourceVCS::all() as $t_type => $t_vcs ) {
+var_dump($t_vcs);
+echo '<br/><br/>';
 	if ( $t_vcs->configuration ) {
 		echo '<tr><td class="spacer"></td></tr>';
 		$t_vcs->update_config_form();
@@ -216,13 +233,22 @@ foreach( SourceVCS::all() as $t_type => $t_vcs ) {
 }
 ?>
 
-<tr>
-<td class="center" colspan="2"><input type="submit" value="<?php echo plugin_lang_get( 'update_configuration' ) ?>"/></td>
-</tr>
-
 </table>
+
+			</div>
+		</div>
+		
+		<div class="widget-toolbox padding-8 clearfix">
+			<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( "update_configuration" ) ?>"/>
+		</div>
+	</div>
+</div>
+
 </form>
 
+	</div>
+</div>
+
 <?php
-html_page_bottom1( __FILE__ );
+layout_page_end( __FILE__ );
 

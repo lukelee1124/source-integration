@@ -19,7 +19,8 @@ $t_vcs = SourceVCS::repo( $t_repo );
 
 $t_repo->pre_stats = $t_repo->stats();
 
-html_page_top();
+layout_page_header();
+layout_page_begin();
 
 ?>
 <br/>
@@ -81,6 +82,6 @@ echo sprintf( plugin_lang_get( 'import_stats' ), $t_stats['changesets'], $t_stat
 </table>
 
 <?php
-html_page_bottom();
+layout_page_end();
 form_security_purge( 'plugin_Source_repo_import_latest' );
 

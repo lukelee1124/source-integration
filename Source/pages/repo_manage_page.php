@@ -50,22 +50,31 @@ function display_pvm_versions($t_version_id=null) {
 	}
 }
 
-html_page_top1( plugin_lang_get( 'title' ) );
-html_page_top2();
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
 ?>
 
-<br/>
-<table class="width75" align="center" cellspacing="1">
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-<tr>
-<td class="form-title" colspan="2"><?php echo plugin_lang_get( 'manage_repository' ) ?></td>
-<td class="right">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-file-o"></i>
+				<?php echo plugin_lang_get( 'manage_repository' ) ?>
+			</h4>
+			<div class="widget-toolbar">
 <?php
 	print_bracket_link( plugin_page( 'list' ) . "&id=$f_repo_id", plugin_lang_get( 'browse' ) );
 	print_bracket_link( plugin_page( 'index' ), plugin_lang_get( 'back' ) );
 ?>
-</td>
-</tr>
+			</div>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr <?php echo helper_alternate_class() ?>>
 <td class="category"><?php echo plugin_lang_get( 'name' ) ?></td>
@@ -93,39 +102,55 @@ html_page_top2();
 <td width="50%"></td>
 </tr>
 
-<tr>
-<td colspan="2">
-<form action="<?php echo plugin_page( 'repo_update_page' ) . '&amp;id=' . $t_repo->id ?>" method="post">
-	<input type="submit" value="<?php echo plugin_lang_get( 'update_repository' ) ?>"/>
-</form>
-<form action="<?php echo plugin_page( 'repo_delete' ) . '&amp;id=' . $t_repo->id ?>" method="post">
-	<?php echo form_security_field( 'plugin_Source_repo_delete' ) ?>
-	<input type="submit" value="<?php echo plugin_lang_get( 'delete_repository' ) ?>"/>
-</form>
-</td>
-<td class="right">
-<form action="<?php echo plugin_page( 'repo_import_latest' ) . '&amp;id=' . $t_repo->id ?>" method="post">
-	<?php echo form_security_field( 'plugin_Source_repo_import_latest' ) ?>
-	<input type="submit" value="<?php echo plugin_lang_get( 'import_latest' ) ?>"/>
-</form>
-<form action="<?php echo plugin_page( 'repo_import_full' ) . '&amp;id=' . $t_repo->id ?>" method="post">
-	<?php echo form_security_field( 'plugin_Source_repo_import_full' ) ?>
-	<input type="submit" value="<?php echo plugin_lang_get( 'import_full' ) ?>"/>
-</form>
-</td>
-</tr>
-
 </table>
+				</div>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<div class="btn-toolbar pull-left">
+					<div class="btn-group">
+<form class="form-inline pull-left" action="<?php echo plugin_page( 'repo_update_page' ) . '&amp;id=' . $t_repo->id ?>" method="post">
+	<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( 'update_repository' ) ?>"/>
+</form>
+<form class="form-inline pull-left" action="<?php echo plugin_page( 'repo_delete' ) . '&amp;id=' . $t_repo->id ?>" method="post">
+	<?php echo form_security_field( 'plugin_Source_repo_delete' ) ?>
+	<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( 'delete_repository' ) ?>"/>
+</form>
+					</div>
+				</div>
+				<div class="btn-toolbar pull-right">
+					<div class="btn-group">
+<form class="form-inline pull-left" action="<?php echo plugin_page( 'repo_import_latest' ) . '&amp;id=' . $t_repo->id ?>" method="post">
+	<?php echo form_security_field( 'plugin_Source_repo_import_latest' ) ?>
+	<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( 'import_latest' ) ?>"/>
+</form>
+<form class="form-inline pull-left" action="<?php echo plugin_page( 'repo_import_full' ) . '&amp;id=' . $t_repo->id ?>" method="post">
+	<?php echo form_security_field( 'plugin_Source_repo_import_full' ) ?>
+	<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( 'import_full' ) ?>"/>
+</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <?php if ( plugin_config_get( 'enable_mapping' ) ) { ?>
-<br/>
+	<div class="space-10"></div>
+	<div class="form-container">
 <form action="<?php echo plugin_page( 'repo_update_mappings' ) . '&id=' . $t_repo->id ?>" method="post">
 <?php echo form_security_field( 'plugin_Source_repo_update_mappings' ) ?>
-<table class="width75" align="center" cellspacing="1">
 
-<tr>
-<td class="form-title"><?php echo plugin_lang_get( 'branch_mapping' ) ?></td>
-</tr>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-file-o"></i>
+				<?php echo plugin_lang_get( 'branch_mapping' ) ?>
+			</h4>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+<table class="table table-striped table-bordered table-condensed table-hover">
 
 <tr class="row-category">
 <td><?php echo plugin_lang_get( 'branch' ) ?></td>
@@ -164,15 +189,20 @@ html_page_top2();
 <td></td>
 </tr>
 
-<tr>
-<td class="center" colspan="5"><input type="submit" value="<?php echo plugin_lang_get( 'mapping_update' ) ?>"/></td>
-</tr>
-
 </table>
+				</div>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input class="btn btn-primary btn-white btn-sm btn-round" type="submit" value="<?php echo plugin_lang_get( "mapping_update" ) ?>"/>
+			</div>
+		</div>
+	</div>
+
 </form>
+	</div>
 
 <?php } ?>
-
+</div>
 <?php
-html_page_bottom1( __FILE__ );
+layout_page_end( __FILE__ );
 
