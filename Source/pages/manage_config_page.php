@@ -224,8 +224,6 @@ foreach( $t_import_urls as $t_ip ) {
 
 <?php
 foreach( SourceVCS::all() as $t_type => $t_vcs ) {
-var_dump($t_vcs);
-echo '<br/><br/>';
 	if ( $t_vcs->configuration ) {
 		echo '<tr><td class="spacer"></td></tr>';
 		$t_vcs->update_config_form();

@@ -82,6 +82,6 @@ echo sprintf( plugin_lang_get( 'import_stats' ), $t_stats['changesets'], $t_stat
 </table>
 
 <?php
-layout_page_end();
+layout_page_end( __FILE__ );
 form_security_purge( 'plugin_Source_repo_import_latest' );
 

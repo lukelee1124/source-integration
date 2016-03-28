@@ -28,7 +28,7 @@ class SourcePlugin extends MantisPlugin {
 
 		$this->version = self::$framework_version;
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 		$this->uses = array(
 			'jQuery' => '1.3',
@@ -99,6 +99,8 @@ class SourcePlugin extends MantisPlugin {
 			'EVENT_CORE_READY' => 'core_ready',
 			'EVENT_LAYOUT_RESOURCES' => 'css',
 			'EVENT_MENU_MAIN' => 'menu_main',
+			'EVENT_MENU_ACCOUNT' => 'menu_main',
+			'EVENT_MENU_MANAGE' => 'menu_main',
 			'EVENT_FILTER_COLUMNS' => 'filter_columns',
 		);
 	}
